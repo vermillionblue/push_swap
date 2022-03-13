@@ -6,7 +6,7 @@
 /*   By: alessa <alessa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:19:42 by danisanc          #+#    #+#             */
-/*   Updated: 2022/02/18 00:43:19 by alessa           ###   ########.fr       */
+/*   Updated: 2022/01/13 11:41:44 by alessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,4 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
-/////////////// new
-long int	ft_atol(const char *str);
 #endif
