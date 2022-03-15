@@ -1,5 +1,7 @@
 #include "push_swap.h"
-#define SIZE 5
+#define SIZE 35
+
+
 
 int findindexbiggest(int *stack_b, int argb)
 {
@@ -20,6 +22,7 @@ int findindexbiggest(int *stack_b, int argb)
 			
 		i++;
 	}
+	
 	return (index);
 }
 
@@ -56,10 +59,12 @@ int findspot(int num, int *stack_b, int argb)
 		if (isbiggest(num, stack_b, argb))
 			return (findindexbiggest(stack_b, argb));
 
-
+		if (issmallest(num, stack_b, argb))
+			return (findindexsmallest(stack_b, argb) + 1);
+			
 		// if ((num > stack_b[0] && num < stack_b[argb - 2]) || (num < stack_b[0] && num > stack_b[argb - 1]))
 		// 	return (0);
-		if ((issmallest(stack_b[i], stack_b, argb) && isbiggest(stack_b[i + 1], stack_b, argb)) || (issmallest(stack_b[i + 1], stack_b, argb) && isbiggest(stack_b[i], stack_b, argb)))
+		if ((issmallest(stack_b[i], stack_b, argb) && isbiggest(stack_b[i + 1], stack_b, argb)) || (issmallest(stack_b[i + 1], stack_b, argb) && isbiggest(stack_b[i], stack_b, argb) && argb > 3))
 		{
 			i++;
 			continue;
@@ -174,11 +179,16 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 		{
 			f = findspot(stack_a[hold_bottom], stack_b, *argb);
 			x = *argc - 1 - hold_bottom;
+			// printf("++++spot+++%d for %d in stack_b and stack_a %d\n", f, stack_a[hold_bottom], x);
+			// printarr(*argb, stack_b);
+			
 			int s;
 			s = *argb - 1 - f;
-			if ((!(f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)) && *argb >= 3)
+			if (*argc - 1 - hold_bottom < hold_top)
 			{
-				while(s > 0 || x > 0)
+			if ((!(f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)) && *argb > 3 && f != 0)
+			{
+				while(s > 0 && x > 0)
 				{	
 					rotate_r(stack_a, 'c', *argc);
 					rotate_r(stack_b, 'c', *argb);
@@ -202,30 +212,53 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			{
 
 				if (f == 0)
-			{	
+				{	
+					push_ab(stack_a, stack_b, argc, argb);
+					write(1, "pb\n", 3);
+				}
+			else
+			{
+				if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb > 3)
+				{
+					
+					while(f > 0)
+					{
+					
+						ft_rotate(stack_b, 'b', *argb);
+						f--;
+					}
+				}
+				else
+				{
+					
+					while(s > 0)
+					{	
+						rotate_r(stack_b, 'b', *argb);
+						s--;
+					}
+				}
 				push_ab(stack_a, stack_b, argc, argb);
 				write(1, "pb\n", 3);
 			}
-			while(s > 0 && *argb >= 3)
-			{	
-				rotate_r(stack_b, 'b', *argb);
-				s--;
-			}
-
 			}
 			
+		}
 		}
 		else
 		{
 			f = findspot(stack_a[hold_top], stack_b, *argb);
-			if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb >= 3)
+			//  printf("++++spot+++%d for %d in stack_b  and stack_a %d\n", f, stack_a[hold_top], hold_top);
+			// printarr(*argb, stack_b);
+			if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb > 3 && f != 0)
 			{
-				while(hold_top > 0 || f > 0)
+				while(hold_top > 0 && f > 0)
 				{
+					
 					ft_rotate(stack_b, 'c', *argb);
-					f--;
 					ft_rotate(stack_a, 'c', *argc);
 					write(1, "rr\n", 3);
+					f--;
+				
 					hold_top--;
 				}
 			}
@@ -241,27 +274,41 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			}
 			else
 			{
-			if (f == 0)
-					{	
-						push_ab(stack_a, stack_b, argc, argb);
-						write(1, "pb\n", 3);
-					}
-					else
+				if (f == 0)
+				{	
+					push_ab(stack_a, stack_b, argc, argb);
+					write(1, "pb\n", 3);
+				}
+				else
+			{
+				if (f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)
+				{
+					
+					while(f > 0)
 					{
-						while(f > 0  && *argb >= 3)
-						{
-							ft_rotate(stack_b, 'b', *argb);
-							f--;
-						}
+					
+						ft_rotate(stack_b, 'b', *argb);
+						f--;
 					}
+				}
+				else
+				{
+					
+					int x;
+					x = *argb - 1 - f;
+
+					//printf("++++++++x %d\n", x);
+					while(x > 0)
+					{	
+						rotate_r(stack_b, 'b', *argb);
+						x--;
+					}
+				}
+				push_ab(stack_a, stack_b, argc, argb);
+				write(1, "pb\n", 3);
+			}
 
 			}
-			
-
-		
-
-		push_ab(stack_a, stack_b, argc, argb);
-		write(1, "pb\n", 3);
 			}
 		}
 
@@ -270,8 +317,8 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 	{
 		int f = 0;
 		f = findspot(stack_a[0], stack_b, *argb);
-			//printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
-			//printarr(*argb, stack_b);
+			// printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
+			// printarr(*argb, stack_b);
 			//printf("++++ccc++++%d\n", hold_top);
 			if (f == 0)
 			{	
@@ -285,7 +332,7 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 					
 					while(f > 0)
 					{
-						//printf("++++ppp++++\n");
+					
 						ft_rotate(stack_b, 'b', *argb);
 						f--;
 					}
