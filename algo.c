@@ -1,6 +1,7 @@
 #include "push_swap.h"
-#define SIZE 35
-
+#define SIZE 5
+//30 for 500 nums    Mean: 15490 for stack of size 500
+//10 for 100 nums
 
 
 int findindexbiggest(int *stack_b, int argb)
@@ -98,7 +99,7 @@ void forthree(int argc, int *stack_a)
 	}
 }
 
-int exploretop(int  *stack_a)
+int exploretop(int  *stack_a, int size)
 {
 	int i;
 	int num;
@@ -107,7 +108,7 @@ int exploretop(int  *stack_a)
 	i = 1;
 	index = 0;
 	num = stack_a[0];
-	while(i < SIZE - 1)
+	while(i < size - 1)
 	{
 		if(stack_a[i] < num)
 		{
@@ -120,7 +121,7 @@ int exploretop(int  *stack_a)
 	return (index);
 }
 
-int explorebottom(int  *stack_a, int argc)
+int explorebottom(int  *stack_a, int argc, int size)
 {
 	int i;
 	int num;
@@ -129,7 +130,7 @@ int explorebottom(int  *stack_a, int argc)
 	i = argc - 3;
 	index = argc - 2;
 	num = stack_a[argc - 2];
-	while(i > argc - 2 - SIZE)
+	while(i > argc - 2 - size)
 	{
 		if(stack_a[i] < num)
 		{
@@ -168,6 +169,8 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 	int x;
 	int	*stack_b;
 
+	
+
 	stack_b = ft_calloc(*argc - 1, sizeof(int));
 	while(*argc >= SIZE - 1)
 	{
@@ -186,7 +189,7 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			s = *argb - 1 - f;
 			if (*argc - 1 - hold_bottom < hold_top)
 			{
-			if ((!(f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)) && *argb > 3 && f != 0)
+			if ((!(f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)) && *argb >= 3 && f != 0)
 			{
 				while(s > 0 && x > 0)
 				{	
@@ -218,9 +221,8 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 				}
 			else
 			{
-				if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb > 3)
+				if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb >= 3)
 				{
-					
 					while(f > 0)
 					{
 					
@@ -249,7 +251,7 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			f = findspot(stack_a[hold_top], stack_b, *argb);
 			//  printf("++++spot+++%d for %d in stack_b  and stack_a %d\n", f, stack_a[hold_top], hold_top);
 			// printarr(*argb, stack_b);
-			if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb > 3 && f != 0)
+			if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb >= 3 && f != 0)
 			{
 				while(hold_top > 0 && f > 0)
 				{
@@ -311,51 +313,49 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			}
 			}
 		}
-
-
-	while(*argc != 1)
-	{
-		int f = 0;
-		f = findspot(stack_a[0], stack_b, *argb);
-			// printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
-			// printarr(*argb, stack_b);
-			//printf("++++ccc++++%d\n", hold_top);
-			if (f == 0)
-			{	
-				push_ab(stack_a, stack_b, argc, argb);
-				write(1, "pb\n", 3);
-			}
-			else
-			{
-				if (f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)
-				{
+	// while(*argc != 1)
+	// {
+	// 	int f = 0;
+	// 	f = findspot(stack_a[0], stack_b, *argb);
+	// 		// printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
+	// 		// printarr(*argb, stack_b);
+	// 		//printf("++++ccc++++%d\n", hold_top);
+	// 		if (f == 0)
+	// 		{	
+	// 			push_ab(stack_a, stack_b, argc, argb);
+	// 			write(1, "pb\n", 3);
+	// 		}
+	// 		else
+	// 		{
+	// 			if (f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)
+	// 			{
 					
-					while(f > 0)
-					{
+	// 				while(f > 0)
+	// 				{
 					
-						ft_rotate(stack_b, 'b', *argb);
-						f--;
-					}
-				}
-				else
-				{
+	// 					ft_rotate(stack_b, 'b', *argb);
+	// 					f--;
+	// 				}
+	// 			}
+	// 			else
+	// 			{
 					
-					int x;
-					x = *argb - 1 - f;
+	// 				int x;
+	// 				x = *argb - 1 - f;
 
-					//printf("++++++++x %d\n", x);
-					while(x > 0)
-					{	
-						rotate_r(stack_b, 'b', *argb);
-						x--;
-					}
-				}
-				push_ab(stack_a, stack_b, argc, argb);
-				write(1, "pb\n", 3);
-			}
-		if (*argc == 1)
-			break;
-	}
+	// 				//printf("++++++++x %d\n", x);
+	// 				while(x > 0)
+	// 				{	
+	// 					rotate_r(stack_b, 'b', *argb);
+	// 					x--;
+	// 				}
+	// 			}
+	// 			push_ab(stack_a, stack_b, argc, argb);
+	// 			write(1, "pb\n", 3);
+	// 		}
+	// 	if (*argc == 1)
+	// 		break;
+	// }
 
 	while(*argb > 1)
 	{
