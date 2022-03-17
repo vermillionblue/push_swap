@@ -1,8 +1,9 @@
 #include "push_swap.h"
+#include <math.h>
 #define SIZE 5
-//30 for 500 nums    Mean: 15490 for stack of size 500
-//10 for 100 nums
-
+//30 for 500 nums  // 29 in loop // old  Mean: 15490 for stack of size 500
+//10 for 100 nums	 Mean: 915 for stack of size 100 
+// 5 for 20 nums     Mean: 74 for stack of size 20 
 
 int findindexbiggest(int *stack_b, int argb)
 {
@@ -168,16 +169,18 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 	int hold_top;
 	int x;
 	int	*stack_b;
+	int size = 4.6403 * (pow(M_E, 0.0037 * (*argc - 1)));
 
 	
 
 	stack_b = ft_calloc(*argc - 1, sizeof(int));
-	while(*argc >= SIZE - 1)
+	while(*argc > size)
 	{
 		int f = 0;
-		hold_top = exploretop(stack_a);
-		hold_bottom = explorebottom(stack_a, *argc);
-		//printf("++++++");
+		size = 7 * (pow(M_E,  0.0037 * (*argc - 1)));
+		hold_top = exploretop(stack_a, size);
+		hold_bottom = explorebottom(stack_a, *argc, size);
+		printf("++size %d++and argc %d++\n", size, *argc);
 		if (*argc - 1 - hold_bottom < hold_top)
 		{
 			f = findspot(stack_a[hold_bottom], stack_b, *argb);
@@ -283,7 +286,7 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 				}
 				else
 			{
-				if (f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)
+				if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1) && *argb >= 3)
 				{
 					
 					while(f > 0)
@@ -313,49 +316,50 @@ void forhundred(int *stack_a, int *argc,  int *argb)
 			}
 			}
 		}
-	// while(*argc != 1)
-	// {
-	// 	int f = 0;
-	// 	f = findspot(stack_a[0], stack_b, *argb);
-	// 		// printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
-	// 		// printarr(*argb, stack_b);
-	// 		//printf("++++ccc++++%d\n", hold_top);
-	// 		if (f == 0)
-	// 		{	
-	// 			push_ab(stack_a, stack_b, argc, argb);
-	// 			write(1, "pb\n", 3);
-	// 		}
-	// 		else
-	// 		{
-	// 			if (f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)
-	// 			{
+	while(*argc != 1)
+	{
+		printf("++++END\n");
+		int f = 0;
+		f = findspot(stack_a[0], stack_b, *argb);
+			// printf("++++spot+++%d for %d in stack_b\n", f, stack_a[0]);
+			// printarr(*argb, stack_b);
+			//printf("++++ccc++++%d\n", hold_top);
+			if (f == 0)
+			{	
+				push_ab(stack_a, stack_b, argc, argb);
+				write(1, "pb\n", 3);
+			}
+			else
+			{
+				if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2) || f == ((*argb - 2) / 2) + 1)&& *argb >= 3) 
+				{
 					
-	// 				while(f > 0)
-	// 				{
+					while(f > 0)
+					{
 					
-	// 					ft_rotate(stack_b, 'b', *argb);
-	// 					f--;
-	// 				}
-	// 			}
-	// 			else
-	// 			{
+						ft_rotate(stack_b, 'b', *argb);
+						f--;
+					}
+				}
+				else
+				{
 					
-	// 				int x;
-	// 				x = *argb - 1 - f;
+					int x;
+					x = *argb - 1 - f;
 
-	// 				//printf("++++++++x %d\n", x);
-	// 				while(x > 0)
-	// 				{	
-	// 					rotate_r(stack_b, 'b', *argb);
-	// 					x--;
-	// 				}
-	// 			}
-	// 			push_ab(stack_a, stack_b, argc, argb);
-	// 			write(1, "pb\n", 3);
-	// 		}
-	// 	if (*argc == 1)
-	// 		break;
-	// }
+					//printf("++++++++x %d\n", x);
+					while(x > 0)
+					{	
+						rotate_r(stack_b, 'b', *argb);
+						x--;
+					}
+				}
+				push_ab(stack_a, stack_b, argc, argb);
+				write(1, "pb\n", 3);
+			}
+		if (*argc == 1)
+			break;
+	}
 
 	while(*argb > 1)
 	{
