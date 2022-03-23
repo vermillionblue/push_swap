@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alessa <alessa@student.42.fr>              +#+  +:+       +#+         #
+#    By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/05 15:32:55 by danisanc          #+#    #+#              #
-#    Updated: 2022/03/10 19:26:57 by alessa           ###   ########.fr        #
+#    Updated: 2022/03/23 18:50:14 by danisanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,13 @@ NAME = push_swap
 
 LIB = libft/libft.a 
 
-SRCS = algo.c checkers.c errors.c ft_atol.c operation_push.c operations.c \ starting.c debug.c
+SRCS = algo.c checkers.c errors.c ft_atol.c operation_push.c operations.c starting.c  choosenum.c findspot.c operations_two.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -g -Werror -Wextra -Wall
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ $(LIB) -o $@ 
