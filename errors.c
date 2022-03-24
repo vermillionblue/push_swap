@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 23:21:27 by danisanc          #+#    #+#             */
+/*   Updated: 2022/03/23 23:24:42 by danisanc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	senderror(char **argv)
@@ -24,16 +36,16 @@ int	senderror(char **argv)
 		}
 		i++;
 	}
-	if(!ft_checkdup(argv))
+	if (!ft_checkdup(argv))
 		return (0);
 	return (1);
 }
 
-int ft_checkdup(char **arr)
+int	ft_checkdup(char **arr)
 {
 	int	i;
 	int	k;
-	
+
 	i = 1;
 	while (arr[i] != 0)
 	{

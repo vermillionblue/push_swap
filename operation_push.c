@@ -1,32 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operation_push.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 23:13:06 by danisanc          #+#    #+#             */
+/*   Updated: 2022/03/23 23:13:51 by danisanc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void rotate_push(int *arr, int *argc)
+static void	rotate_push(int *arr, int *argc)
 {
-	int temp;
-	int temp2;
-	int i;
+	int	temp;
+	int	temp2;
+	int	i;
 
 	i = *argc - 2;
 	temp = arr[*argc - 2];
-	while(i >= 0)
+	while (i >= 0)
 	{
 		temp2 = arr[i];
 		arr[i] = temp;
 		temp = temp2;
 		i--;
 	}
-
 }
 
-static void rotate_r_push(int *arr, int *argc)
+static void	rotate_r_push(int *arr, int *argc)
 {
-	int temp;
-	int temp2;
-	int i;
+	int	temp;
+	int	temp2;
+	int	i;
 
 	i = 1;
 	temp = arr[0];
-	while(i < *argc)
+	while (i < *argc)
 	{
 		temp2 = arr[i];
 		arr[i] = temp;
