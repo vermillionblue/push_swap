@@ -1,0 +1,3 @@
+[submodule "awesome-libft"]
+	path = awesome-libft
+	url = https://github.com/vermillionblue/awesome-libft.git
