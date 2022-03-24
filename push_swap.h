@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:07:02 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:33:44 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:43:12 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "libft/libft.h"
 
 //check for input errors
-long	ft_atol(const char *str);
 int		senderror(char **argv);
 int		ft_checkdup(char **arr);
 int		issmallest(int num, int *arr, int argc);
