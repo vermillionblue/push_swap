@@ -3,74 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:34:39 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:42:06 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:21:19 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	forthree(int argc, int *stack_a)
+void	forthree(t_data *data)
 {
-	while (!(issorted(stack_a, argc)))
+	while (!(issorted(data->stack_a, data->len_a)))
 	{
-		if (isbiggest(stack_a[0], stack_a, argc)
-			&& issmallest(stack_a[1], stack_a, argc) && argc == 4)
-			ft_rotate(stack_a, 'a', argc);
-		if (stack_a[0] > stack_a[1])
-			ft_swap(stack_a, 'a');
-		if (!(isbiggest(stack_a[argc - 2], stack_a, argc)))
-			rotate_r(stack_a, 'a', argc);
+		int len = data->len_a;
+		if (isbiggest(data->stack_a[0], data->stack_a, data->len_a)
+			&& issmallest(data->stack_a[1], data->stack_a, data->len_a) && data->len_a == 4)
+			ft_rotate(data->stack_a, 'a', data->len_a);
+		if (data->stack_a[0] > data->stack_a[1])
+			ft_swap(data->stack_a, 'a');
+		if (!(isbiggest(data->stack_a[len - 2], data->stack_a, data->len_a)))
+			rotate_r(data->stack_a, 'a', data->len_a);
 	}
 }
 
-void	pushbackin(int *stack_a, int argc, int *stack_b, int argb)
+void	pushbackin(t_data *data)
 {
 	int	index;
 
-	while (argb > 1)
+	while (data->len_b > 1)
 	{
-		if (isbiggest(stack_b[0], stack_b, argb))
+		if (isbiggest(data->stack_b[0], data->stack_b, data->len_b))
 		{
-			push_ab(stack_b, stack_a, &argb, &argc);
+			push_ab(&data);
 			write(1, "pa\n", 3);
 		}
 		else
 		{
-			index = findindexbiggest(stack_b, argb);
-			if (index < ((argb - 2) / 2) || index == ((argb - 2) / 2)
-				|| index == ((argb - 2) / 2) + 1)
-				rotate_remainder(&index, stack_b, argb, 'b');
+			index = findindexbiggest(data->stack_b, data->len_b);
+			if (index < ((data->len_b - 2) / 2) || index == ((data->len_b - 2) / 2)
+				|| index == ((data->len_b - 2) / 2) + 1)
+				rotate_remainder(&index, data->stack_b, data->len_b, 'b');
 			else
 			{
-				index = argb - 1 - index;
-				rotate_r_remainder(&index, stack_b, argb, 'b');
+				index = data->len_b - 1 - index;
+				rotate_r_remainder(&index, data->stack_b, data->len_b, 'b');
 			}
 		}
 	}
 }
 
-void	forfiveandfour(int *stack_a, int *stack_b, int *argc, int *argb)
+void	forfiveandfour(t_data *data)
 {
-	while (*argc > 3)
+	while (data->len_a > 3)
 	{
-		if (isbiggest(stack_a[0], stack_a, *argc)
-			|| issmallest(stack_a[0], stack_a, *argc))
-			ft_rotate(stack_a, 'a', *argc);
+		if (isbiggest(data->stack_a[0], data->stack_a, data->len_a)
+			|| issmallest(data->stack_a[0], data->stack_a, data->len_a))
+			ft_rotate(data->stack_a, 'a', data->len_a);
 		else
-			pbandprint(stack_a, stack_b, argc, argb);
+			pbandprint(&data);
 	}
-	if (issmallest(stack_a[0], stack_a, *argc) && stack_b[0] < stack_b[1])
-		ft_swapab(stack_a, stack_b);
-	else if (issmallest(stack_a[0], stack_a, *argc))
-		ft_swap(stack_a, 'a');
-	pushbackin(stack_a, *argc, stack_b, *argb);
-	rotate_r(stack_a, 'a', *argc);
+	if (issmallest(data->stack_a[0], data->stack_a, data->len_a) && data->stack_b[0] < data->stack_b[1])
+		ft_swapab(&data);
+	else if (issmallest(data->stack_a[0], data->stack_a, data->len_a))
+		ft_swap(data->stack_a, 'a');
+	pushbackin(&data);
+	rotate_r(data->stack_a, 'a', data->len_a);
 }
 
-void	forhundred(int *stack_a, int *stack_b, int *argc, int *argb)
+void	forhundred(t_data* data)
 {
 	int	hold_bottom;
 	int	hold_top;
@@ -79,16 +80,16 @@ void	forhundred(int *stack_a, int *stack_b, int *argc, int *argb)
 	int	f;
 	int	size;
 
-	size = choosesize(*argc);
-	while (*argc > 1)
+	size = choosesize(data->len_a);
+	while (data->len_a > 1)
 	{
 		f = 0;
-		hold_top = exploretop(stack_a, size, stack_b, *argb);
-		hold_bottom = explorebottom(stack_a,*argc, size, stack_b, *argb);
-		if (*argc - 1 - hold_bottom < hold_top)
+		hold_top = exploretop(&data);
+		hold_bottom = explorebottom(&data);
+		if (data->len_a - 1 - hold_bottom < hold_top)
 		{
-			f = findspot(stack_a[hold_bottom], stack_b, *argb);
-			x = *argc - 1 - hold_bottom;
+			f = findspot(data->stack_a[hold_bottom], &data);
+			x = data->len_a - 1 - hold_bottom;
 			s = *argb - 1 - f;
 			if (*argc - 1 - hold_bottom < hold_top)
 			{
@@ -98,18 +99,18 @@ void	forhundred(int *stack_a, int *stack_b, int *argc, int *argb)
 				{
 					while (s > 0 && x > 0)
 					{	
-						double_r_r(stack_a, stack_b, *argc, *argb);
+						double_r_r(stack_a, stack_b, data->len_a, *argb);
 						x--;
 						s--;
 					}
 				}
-				rotate_r_remainder(&x, stack_a, *argc, 'a');
+				rotate_r_remainder(&x, stack_a, data->len_a, 'a');
 				if (*argb < 3)
-					pbandprint(stack_a, stack_b, argc, argb);
+					pbandprint(stack_a, stack_b, &data->len_a, argb);
 				else
 				{
 					if (f == 0)
-						pbandprint(stack_a, stack_b, argc, argb);
+						pbandprint(stack_a, stack_b, &data->len_a, argb);
 					else
 					{
 						if ((f < ((*argb - 2) / 2) || f == ((*argb - 2) / 2)
@@ -117,7 +118,7 @@ void	forhundred(int *stack_a, int *stack_b, int *argc, int *argb)
 							rotate_remainder(&f, stack_b, *argb, 'b');
 						else
 							rotate_r_remainder(&s, stack_b, *argb, 'b');
-						pbandprint(stack_a, stack_b, argc, argb);
+						pbandprint(stack_a, stack_b, &data->len_a, argb);
 					}
 				}
 			}
@@ -160,23 +161,22 @@ void	forhundred(int *stack_a, int *stack_b, int *argc, int *argb)
 
 int	main(int argc, char **argv)
 {
-	int	*stack_b;
-	int	*stack_a;
-	int	argb;
+	t_data	data;
 
-	stack_b = ft_calloc(argc - 1, sizeof(int));
-	argb = 0;
+	data.stack_b = ft_calloc(argc - 1, sizeof(int));
+	data.len_b = 0;
+	data.len_a = argc;
 	if (!(senderror(argv)))
 		return (write(2, "Error\n", 6));
-	stack_a = placenums(argc, argv);
-	if (argc == 2 || issorted(stack_a, argc))
+	data.stack_a = placenums(argc, argv);
+	if (argc == 2 || issorted(data.stack_a, argc))
 		return (0);
 	if (argc < 5)
-		forthree(argc, stack_a);
+		forthree(&data);
 	if (argc <= 6)
-		forfiveandfour(stack_a, stack_b, &argc, &argb);
+		forfiveandfour(&data);
 	if (argc > 6)
-		forhundred(stack_a, stack_b, &argc, &argb);
+		forhundred(&data);
 	free(stack_a);
 	free(stack_b);
 	return (0);

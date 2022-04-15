@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   choosenum.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:20:31 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:23:43 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:17:33 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	choosesize(int argc)
+int	choosesize(int num)
 {
-	if (argc >= 100 && argc < 500)
+	if ((num >= 100 && num) < 500)
 		return (10);
 	else
 		return (30);
 }
 
-int	exploretop(int *stack_a, int size, int *stack_b, int argb)
+int	exploretop(t_data *data, int size)
 {
 	int	i;
 	int	num;
@@ -28,12 +28,12 @@ int	exploretop(int *stack_a, int size, int *stack_b, int argb)
 
 	i = 1;
 	index = 0;
-	num = findspot(stack_a[0], stack_b, argb);
+	num = findspot(data->stack_a[0], &data);
 	while (i < size - 1)
 	{
-		if (findspot(stack_a[i], stack_b, argb) < num)
+		if (findspot(data->stack_a[i], &data) < num)
 		{
-			num = findspot(stack_a[i], stack_b, argb);
+			num = findspot(data->stack_a[i], &data);
 			index = i;
 		}
 		i++;
@@ -41,20 +41,20 @@ int	exploretop(int *stack_a, int size, int *stack_b, int argb)
 	return (index);
 }
 
-int	explorebottom(int *stack_a, int argc, int size, int *stack_b, int argb)
+int	explorebottom(t_data *data, int size)
 {
 	int	i;
 	int	num;
 	int	index;
 
-	i = argc - 3;
-	index = argc - 2;
-	num = findspot(stack_a[argc - 2], stack_b, argb);
-	while (i > argc - 2 - size)
+	i = data->len_a - 3;
+	index = data->len_a - 2;
+	num = findspot(data->stack_a[data->len_a - 2], &data);
+	while (i > data->len_a - 2 - size)
 	{
-		if (findspot(stack_a[i], stack_b, argb) < num)
+		if (findspot(data->stack_a[i], &data) < num)
 		{
-			num = findspot(stack_a[i], stack_b, argb);
+			num = findspot(data->stack_a[i], &data);
 			index = i;
 		}	
 		i--;

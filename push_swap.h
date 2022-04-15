@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:07:02 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/24 21:55:24 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:19:42 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,46 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
+typedef struct s_data
+{
+    int len_a;
+    int len_b;
+    int *stack_a;
+    int *stack_b;
+}              t_data;
+
+
 //check for input errors
 int		senderror(char **argv);
 int		ft_checkdup(char **arr);
-int		issmallest(int num, int *arr, int argc);
-int		isbiggest(int num, int *arr, int argc);
-int		issorted(int *arr, int argc);
+int		issorted(int *arr, int len);
 int		*placenums(int argc, char **argv);
+
+// helper functions
+int		issmallest(int num, int *arr, int len);
+int		isbiggest(int num, int *arr, int len);
+
 //operations
-void	push_ab(int	*stack_a, int *stack_b, int *argc, int *argb);
+void	push_ab(t_data*	data);
+
 void	rotate_r(int *arr, char c, int argc);
 void	ft_rotate(int *arr, char c, int argc);
 void	ft_swap(int *arr, char c);
-void	ft_swapab(int *arr1, int *arr2);
-void	pbandprint(int *stack_a, int *stack_b, int *argc, int *argb);
-void	double_r(int *stack_a, int *stack_b, int argc, int argb);
-void	double_r_r(int *stack_a, int *stack_b, int argc, int argb);
+void	ft_swapab(t_data* data);
+void	pbandprint(t_data *data);
+void	double_r(t_data *data);
+void	double_r_r(t_data *data);
 void	rotate_r_remainder(int *counter, int *stack, int argnum, char c);
 void	rotate_remainder(int *counter, int *stack, int argnum, char c);
 
 ///find spot
 int		findindexbiggest(int *stack_b, int argb);
 int		findindexsmallest(int *stack_b, int argb);
-int		findspot(int num, int *stack_b, int argb);
+int		findspot(int num, t_data *data);
+
 ///choose number to push
-int		choosesize(int argc);
-int		exploretop(int *stack_a, int size, int *stack_b, int argb);
-int		explorebottom(int *stack_a, int argc, int size, int *stack_b, int argb);
+int		choosesize(int num);
+int		exploretop(t_data *data, int size);
+int		explorebottom(t_data *data, int size);
+
 #endif

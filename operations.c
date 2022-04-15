@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:14:10 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:16:46 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:08:09 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_r(int *arr, char c, int argc)
+void	rotate_r(int *arr, char c, int len)
 {
 	int	temp;
 	int	end;
@@ -20,9 +20,9 @@ void	rotate_r(int *arr, char c, int argc)
 	int	i;
 
 	i = 1;
-	end = arr[argc - 2];
+	end = arr[len - 2];
 	temp = arr[0];
-	while (i < argc - 1)
+	while (i < len - 1)
 	{
 		temp2 = arr[i];
 		arr[i] = temp;
@@ -36,16 +36,16 @@ void	rotate_r(int *arr, char c, int argc)
 		write(1, "rrb\n", 4);
 }
 
-void	ft_rotate(int *arr, char c, int argc)
+void	ft_rotate(int *arr, char c, int len)
 {
 	int	temp;
 	int	start;
 	int	temp2;
 	int	i;
 
-	i = argc - 2;
+	i = len - 2;
 	start = arr[0];
-	temp = arr[argc - 2];
+	temp = arr[len - 2];
 	while (i >= 0)
 	{
 		temp2 = arr[i];
@@ -53,7 +53,7 @@ void	ft_rotate(int *arr, char c, int argc)
 		temp = temp2;
 		i--;
 	}
-	arr[argc - 2] = start;
+	arr[len - 2] = start;
 	if (c == 'a')
 		write(1, "ra\n", 3);
 	if (c == 'b')
@@ -73,9 +73,9 @@ void	ft_swap(int *arr, char c)
 		write(1, "sb\n", 3);
 }
 
-void	ft_swapab(int *arr1, int *arr2)
+void	ft_swapab(t_data* data)
 {
-	ft_swap(arr1, 'c');
-	ft_swap(arr2, 'c');
+	ft_swap(data->stack_b, 'c');
+	ft_swap(data->stack_a, 'c');
 	write(1, "ss\n", 3);
 }

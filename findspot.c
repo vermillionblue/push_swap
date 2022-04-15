@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findspot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:06:43 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:12:34 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:54:17 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,26 @@ int	findindexsmallest(int *stack_b, int argb)
 	return (index);
 }
 
-int	findspot(int num, int *stack_b, int argb)
+int	findspot(int num, t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < argb - 2)
+	while (i < data->len_b - 2)
 	{
-		if (isbiggest(num, stack_b, argb))
-			return (findindexbiggest(stack_b, argb));
-		if (issmallest(num, stack_b, argb))
-			return (findindexsmallest(stack_b, argb) + 1);
-		if ((issmallest(stack_b[i], stack_b, argb)
-				&& isbiggest(stack_b[i + 1], stack_b, argb))
-			|| (issmallest(stack_b[i + 1], stack_b, argb)
-				&& isbiggest(stack_b[i], stack_b, argb) && argb > 3))
+		if (isbiggest(num, data->stack_b, data->len_b))
+			return (findindexbiggest(data->stack_b, data->len_b));
+		if (issmallest(num, data->stack_b, data->len_b))
+			return (findindexsmallest(data->stack_b, data->len_b) + 1);
+		if ((issmallest(data->stack_b[i], data->stack_b, data->len_b)
+				&& isbiggest(data->stack_b[i + 1], data->stack_b, data->len_b))
+			|| (issmallest(data->stack_b[i + 1], data->stack_b, data->len_b)
+				&& isbiggest(data->stack_b[i], data->stack_b, data->len_b) && data->len_b > 3))
 		{
 			i++;
 			continue ;
 		}
-		if ((num < stack_b[i] && num > stack_b[i + 1]))
+		if ((num < data->stack_b[i] && num > data->stack_b[i + 1]))
 			break ;
 		i++;
 	}

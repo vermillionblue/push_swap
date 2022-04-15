@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   operations_two.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danisanc <danisanc@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:17:07 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/23 23:19:17 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:11:07 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pbandprint(int *stack_a, int *stack_b, int *argc, int *argb)
+void	pbandprint(t_data *data)
 {
-	push_ab(stack_a, stack_b, argc, argb);
+	push_ab(&data);
 	write(1, "pb\n", 3);
 }
 
-void	double_r(int *stack_a, int *stack_b, int argc, int argb)
+void	double_r(t_data *data)
 {
-	ft_rotate(stack_b, 'c', argb);
-	ft_rotate(stack_a, 'c', argc);
+	ft_rotate(data->stack_b, 'c', data->len_b);
+	ft_rotate(data->stack_a, 'c', data->len_a);
 	write(1, "rr\n", 3);
 }
 
-void	double_r_r(int *stack_a, int *stack_b, int argc, int argb)
+void	double_r_r(t_data *data)
 {
-	rotate_r(stack_a, 'c', argc);
-	rotate_r(stack_b, 'c', argb);
+	rotate_r(data->stack_a, 'c', data->len_a);
+	rotate_r(data->stack_b, 'c', data->len_b);
 	write(1, "rrr\n", 4);
 }
 
