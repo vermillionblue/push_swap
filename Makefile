@@ -6,7 +6,7 @@
 #    By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/05 15:32:55 by danisanc          #+#    #+#              #
-#    Updated: 2022/04/15 17:27:40 by danisanc         ###   ########.fr        #
+#    Updated: 2022/04/16 19:11:44 by danisanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = push_swap
 LIB = libft/libft.a 
 
 SRCS = algo.c checkers.c errors.c operation_push.c operations.c \
- starting.c  choosenum.c findspot.c operations_two.c
+ choosenum.c findspot.c operations_two.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 

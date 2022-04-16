@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:17:07 by danisanc          #+#    #+#             */
-/*   Updated: 2022/04/15 18:11:07 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/16 17:40:07 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pbandprint(t_data *data)
 {
-	push_ab(&data);
+	push_ab(data->stack_a, data->stack_b, &data->len_a, &data->len_b);
 	write(1, "pb\n", 3);
 }
 

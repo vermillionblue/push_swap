@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:14:10 by danisanc          #+#    #+#             */
-/*   Updated: 2022/04/15 18:08:09 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/16 19:12:50 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_swap(int *arr, char c)
 		write(1, "sb\n", 3);
 }
 
-void	ft_swapab(t_data* data)
+void	ft_swapab(t_data *data)
 {
 	ft_swap(data->stack_b, 'c');
 	ft_swap(data->stack_a, 'c');

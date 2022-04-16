@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:21:27 by danisanc          #+#    #+#             */
-/*   Updated: 2022/03/24 22:10:21 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:05:58 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	senderror(char **argv)
 			return (0);
 		while (argv[i][k])
 		{
-			if (k == 0 && argv[i][k] == '-')
+			if (k == 0 && argv[i][k] == '-' && argv[i][k + 1] != 0)
 			{
 				k++;
 				continue ;

@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:13:06 by danisanc          #+#    #+#             */
-/*   Updated: 2022/04/15 18:09:16 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/16 19:37:30 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ static void	rotate_r_push(int *arr, int *len)
 	}
 }
 
-void	push_ab(t_data*	data)
+void	push_ab(int	*stack_a, int	*stack_b, int *argc, int *argb)
 {
 	int	temp;
 
-	temp = data->stack_a[0];
-	rotate_push(data->stack_a, data->len_a);
-	data->len_a = data->len_a - 1;
-	if (data->len_b == 0)
+	temp = stack_a[0];
+	rotate_push(stack_a, argc);
+	*argc = *argc - 1;
+	if (*argb == 0)
 	{
-		data->stack_b[0] = temp;
-		data->len_b = 2;
+		stack_b[0] = temp;
+		*argb = 2;
 	}
 	else
 	{
-		rotate_r_push(data->stack_b, data->len_b);
-		data->stack_b[0] = temp;
-		data->len_b = data->len_b + 1;
+		rotate_r_push(stack_b, argb);
+		stack_b[0] = temp;
+		*argb = *argb + 1;
 	}
 }

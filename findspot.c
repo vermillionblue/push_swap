@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:06:43 by danisanc          #+#    #+#             */
-/*   Updated: 2022/04/15 17:54:17 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/04/16 19:13:32 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	findspot(int num, t_data *data)
 		if ((issmallest(data->stack_b[i], data->stack_b, data->len_b)
 				&& isbiggest(data->stack_b[i + 1], data->stack_b, data->len_b))
 			|| (issmallest(data->stack_b[i + 1], data->stack_b, data->len_b)
-				&& isbiggest(data->stack_b[i], data->stack_b, data->len_b) && data->len_b > 3))
+				&& isbiggest(data->stack_b[i], data->stack_b, data->len_b)
+				&& data->len_b > 3))
 		{
 			i++;
 			continue ;
