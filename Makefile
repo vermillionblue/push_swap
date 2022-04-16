@@ -6,7 +6,7 @@
 #    By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/05 15:32:55 by danisanc          #+#    #+#              #
-#    Updated: 2022/04/16 19:11:44 by danisanc         ###   ########.fr        #
+#    Updated: 2022/04/16 22:03:41 by danisanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,18 +27,21 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -g -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall
 
 $(NAME): $(OBJS)
+	$(MAKE) -C libft
 	$(CC) $(CFLAGS) $^ $(LIB) -o $@ 
 
 all: $(NAME)
 
 clean:
 	rm -f $(OBJS)
+	rm -f libft/*.o
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f libft/libft.a
 
 re: fclean all
 
